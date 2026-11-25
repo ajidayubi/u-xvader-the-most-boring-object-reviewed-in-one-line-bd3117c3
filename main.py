@@ -24,6 +24,8 @@ def main():
     assert "\n" not in line, "the review must stay on one line"
     assert 1 <= len(line) <= 200, "the review must be 1-200 characters"
     assert line.strip(), "the review must not be blank"
+    assert line == line.strip(), "no leading or trailing whitespace"
+    assert all(ord(c) >= 32 for c in line), "no control characters"
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8", newline="") as f:
         f.write(line)
